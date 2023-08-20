@@ -22,7 +22,7 @@ def delete_chastisement(pupil):
 def get_random_lesson(pupil, subject):
     lessons = Lesson.objects.filter(year_of_study=pupil.year_of_study, group_letter=pupil.group_letter)
     if not subject:
-        random_lesson = random.choice(lessons)
+        random_lesson = lessons.order_by('?').first()
         return random_lesson
     else:
         filtered_lessons = lessons.filter(subject__title__contains=subject)
