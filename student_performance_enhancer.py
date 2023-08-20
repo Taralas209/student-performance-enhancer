@@ -84,10 +84,10 @@ def get_pupil(args):
     try:
         pupil = Schoolkid.objects.get(full_name__contains=args.name)
         return pupil
-    except MultipleObjectsReturned:
+    except Schoolkid.MultipleObjectsReturned:
         print("Найдено несколько учеников с таким именем. Уточните имя.")
         sys.exit(1)
-    except ObjectDoesNotExist:
+    except Schoolkid.ObjectDoesNotExist:
         print("Ученик с таким именем не найден. Проверьте правильно ли вы указали имя")
         sys.exit(2)
 
