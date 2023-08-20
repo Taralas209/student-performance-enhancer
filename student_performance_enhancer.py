@@ -19,17 +19,6 @@ def delete_chastisement(pupil):
     Chastisement.objects.filter(schoolkid=pupil).delete()
 
 
-def create_commendation(pupil, lesson, commendation_text):
-
-    Commendation(
-        text=commendation_text,
-        created=lesson.date,
-        schoolkid=pupil,
-        subject=lesson.subject,
-        teacher=lesson.teacher
-    ).save()
-
-
 def get_random_lesson(pupil, subject):
     lessons = Lesson.objects.filter(year_of_study=pupil.year_of_study, group_letter=pupil.group_letter)
     if not subject:
@@ -116,4 +105,10 @@ if __name__ == "__main__":
     fix_marks(pupil)
     delete_chastisement(pupil)
     commendation_text = get_random_commendation()
-    create_commendation(pupil, lesson, commendation_text)
+    Commendation.objects.create(
+        text=commendation_text,
+        created=lesson.date,
+        schoolkid=pupil,
+        subject=lesson.subject,
+        teacher=lesson.teacher
+    )
